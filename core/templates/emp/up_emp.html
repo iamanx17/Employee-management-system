@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% block title %}Update the employee data{% endblock title %}
+{% block content %}
+
+<div class="container my-5 w-75 mx-auto">
+    <h1 class="text-center">Updating details of {{emp.EmpName | title}}</h1>
+    <hr class="w-50 mx-auto" />
+    <form action='/update_emp/' method="POST">
+        {% csrf_token %}
+        <input type='hidden' value='{{emp.EmpId}}' name='id' />
+        Name <input type='text' name="empname" value="{{emp.EmpName}}"/>
+        Age <input type='number' name="age" value="{{emp.Age}}"/>
+        Department
+        <select class="form-select" name='dpt' aria-label="Default select example">
+            <option selected>{{emp.DeptName}}</option>
+            {% for j in dpt %}
+            <option value="{{j.id}}">{{j.emp_dpt}}</option>
+            {% endfor %}
+          </select>
+        
+
+        <button type='submit' class='btn btn-primary'>Update</button>
+
+    </form>
+  
+
+
+
+
+
+
+
+{% endblock content %}

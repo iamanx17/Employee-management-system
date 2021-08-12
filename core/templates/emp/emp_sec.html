@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %} {% block title %}Add Employee{% endblock title %}
+{% block emp_sec %}active{% endblock emp_sec %} {% block content %}
+
+<div class="container my-5 w-75 mx-auto">
+  <h1 class="text-center">Add new employee data:</h1>
+  <hr class="w-50 mx-auto" />
+  {% if user.is_authenticated and user.is_superuser %}
+  <div class="register">
+    <form action="/add_emp/" method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          required
+          type="email"
+          name="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="top_secret@gmail.com"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Full Name</label>
+        <input
+          required
+          type="text"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          name="emp_name"
+          placeholder="Aman Mishra"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Age</label>
+        <input
+          required
+          type="number"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          name="age"
+          placeholder="22"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"
+          >Select department</label
+        >
+        <select
+          name="id"
+          class="form-select"
+          aria-label="Default select example"
+        >
+          <option selected>Select department</option>
+          {% for i in dpt %}
+          <option value="{{i.id}}">{{i.emp_dpt|title}}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-danger">Add</button>
+    </form>
+  </div>
+  {% else %}
+  <div class="container">
+    <p>Please login to access in case your are logged in then please ask for the permission from admin</p>
+  </div>
+
+
+  {% endif %}
+</div>
+
+{% endblock content %}

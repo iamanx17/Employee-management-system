@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %} {% block title %}Employee List {% endblock title%} 
+{% load static %} {% block content %}
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Employee list</h1>
+  <hr class="w-50 mx-auto" />
+  {% if user.is_authenticated and user.is_superuser %}
+  <div class="row row-cols-1 row-cols-md-4 g-5">
+    {% for i in employee %}
+
+    <div class="col">
+      <div class="card">
+        <img
+          src="{% static 'images/profile.png' %}"
+          class="card-img-top img-fluid"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{i.EmpName | title}}, {{i.Age }}</h5>
+          <p class="card-text">{{i.DeptName | title}}</p>
+          <div class="d-flex align-items-center">
+            <!-- Button trigger modal -->
+            <a href='/edit_emp/{{i.EmpId}}' class='btn btn-dark'>Edit</a>
+            <form action='/dlt_emp/' method="POST">
+              {% csrf_token %}
+              <input type='hidden' value='{{i.EmpId}}' name='emp_id'/>
+              <button type="submit" class="btn btn-primary mx-2">
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="container">
+    <p>Please login to access in case you are logged in then ask for the permission</p>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock content %}

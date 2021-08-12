@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+{% block title %}Update the employee data{% endblock title %}
+{% block content %}
+
+<div class="container my-5 w-75 mx-auto">
+    <h1 class="text-center">updating data:{{dpt.emp_dpt}}</h1>
+    <hr class="w-50 mx-auto" />
+    <form action="/update_dpt/" method="POST">
+        {% csrf_token %}
+        <input type='hidden' value="{{dpt.id}}" name='id' />
+       Name: <input type='text' name='dpt_name' value={{dpt.emp_dpt}} />
+        <button type='submit' class='btn btn-primary'>update</button>
+
+    </form>
+  
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock content %}

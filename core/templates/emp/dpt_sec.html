@@ -1,0 +1,76 @@
+{% extends 'core/base.html' %} {% block title %}Department section
+{% endblock title %} 
+{% block dpt_sec %}active{% endblock dpt_sec %}
+{% block content %}
+
+
+<div class="container my-5">
+  <h1 class="text-center text-info mb-4">Department section</h1>
+  <hr class="w-50 mx-auto" />
+  {% if user.is_authenticated and user.is_superuser %}
+
+  <div class="row my-5">
+    <div class="col-lg-5 col-12">
+      <ul class="list-group">
+        <h3>Department list:</h3>
+        {% for i in dpt %}
+        <li
+          class="
+            list-group-item list-group-item-dark
+            justify-content-between
+            d-flex
+          "
+        >
+          {{i.emp_dpt | title}}<!--Using template filter-->
+          <div class="button d-flex">
+            <form action="/dlt_dpt/" method="post">
+              {% csrf_token %}
+              <input type="hidden" value="{{i.emp_dpt}}" name="dpt" />
+              <button type="submit" class="btn btn-danger mx-2">Delete</button>
+            </form>            
+            <!-- Button trigger modal -->
+            <a href='/edit_dpt/{{i.id}}' class='btn btn-warning'>
+              Edit
+            </a>
+          </li>
+
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-lg-7 col-12 px-5">
+      <h3>Add new Department here:</h3>
+      <div class="form">
+        <form action="/add_dpt/" method="post">
+          {% csrf_token %}
+          <div class="mb-3">
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label"
+                >Department name</label
+              >
+              <input
+                type="text"
+                name="dpt_name"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Development department"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-success">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="container">
+    <p>
+      Please login to access department section if your login then ask for the
+      required permission.
+    </p>
+  </div>
+
+  {% endif %}
+</div>
+
+{% endblock content %}

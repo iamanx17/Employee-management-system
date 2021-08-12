@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+{% block title %}Welcome to login page{% endblock title %}
+
+{% block content %}
+<div class="container my-5 w-75 mx-auto">
+    <h1 class="text-center">Sign In</h1>
+    <hr class="w-50 mx-auto" />
+    <div class="login">
+      <form action="/login/" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input
+            required
+            type="text"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="username"
+            placeholder='Username'
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            required
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            name="password"
+            placeholder='Enter your password'
+          />
+        </div>        
+        <button type="submit" class="btn btn-danger">Sign In</button>
+      </form>
+      <p class='my-3'>Create account <a style='text-decoration:none' href="/register/">Register</a></p>
+    </div>
+  </div>
+  
+  {% endblock content %}

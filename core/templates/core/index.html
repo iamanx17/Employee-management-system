@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block link %}active{% endblock link%}
+{% block title %}Welcome to the Employee management system{% endblock title %}
+{% block home %}active{% endblock home %}
+{% block content %}
+
+<div class="container my-5 d-flex justify-content-center align-items-center ">
+    {% if user.is_authenticated and user.is_superuser %}
+    <div class="container">
+    <div class="row">
+        <div class="col-lg-7">
+            <img src="{% static 'images/1.png' %}" class="img-fluid" alt="...">
+        </div>
+        <div class="col-lg-5">
+            <div class="container my-5">
+                <h1>Choose your destination</h1>
+                <hr class="w-50 mx-auto mb-5">        
+                <a href='dpt_sec'><button type="button" class="btn btn-primary">Add Department ({{dpt}})</button></a>
+                <a href='dpt_sec'><button type="button" class="btn btn-primary">Delete Department ({{dpt}})</button></a>             
+                <a href='dpt_sec'> <button type="button" class="btn btn-primary my-2">Edit Department ({{dpt}})</button></a>        
+                <a href='emp_sec'> <button type="button" class="btn btn-primary">Add Employee ({{emp}})</button></a>
+                <a href='emp'> <button type='button' class='btn btn-primary'>Delete Employee ({{emp}})</button></a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    {% elif user.is_authenticated %}
+    <div class="container align-items-center justify-content-center">
+        <h1>Welcome to employee management system</h1>
+        <hr class="w-50 mx-auto">
+        <p>Right now you dont have the permission to use this software. Kindly ask the admin for permission</p>
+    </div>
+    {% else %}
+    <div class="container d-flex flex-column align-items-center justify-content-center">
+        <h1>Welcome to employee management system</h1>
+        <hr class="w-50 mx-auto">
+        <p>Please Login to access the Employee management system. <div><a href="/login/" class="btn btn-danger">Login</a><div></p>
+
+
+    </div>
+
+    {% endif %}
+
+
+    
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
